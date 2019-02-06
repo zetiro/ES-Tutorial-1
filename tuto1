@@ -19,11 +19,6 @@ KB_MYML="kibana.yml"
 # ES Package Install
 function install_es_packages
 {
-    git > /dev/null
-    if [ $? -ne 1 ]; then
-        sudo yum -y install git
-    fi
-    
     wget 2> /dev/null
     if [ $? -ne 1 ]; then
         sudo yum -y install wget
