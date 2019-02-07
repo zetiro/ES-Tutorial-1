@@ -2,6 +2,8 @@
 
 ElasticSearch 첫번째 튜토리얼을 기술합니다.
 
+본 스크립트는 외부 공인망을 기준으로 작성되었습니다.
+
 ## Product 별 버전 상세
 ```
 Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
