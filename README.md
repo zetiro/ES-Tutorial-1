@@ -121,4 +121,5 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 
 ### Kibana
 * Web Browser 에 [http://{FQDN}:5601](http://{FQDN}:5601) 실행
+
 ![Optional Text](image/kibana.png)
