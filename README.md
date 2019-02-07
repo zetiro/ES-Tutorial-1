@@ -42,34 +42,44 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 ## ELK Tutorial 1 - Elasticsearch, Kibana 세팅
 
 ### Elasticsearch
-* packages/elasticsearch/config/elasticsearch.yml
-  - network.host, http.cors.enabled, http.cors.allow-origin 추가설정
+* /etc/elasticsearch/elasticsearch.yml
+  - cluster.name, node.name, network.host, http.cors.enabled, http.cors.allow-origin 추가설정
+  - **tuto1 2 실행 후 cluster.name 은 unique name 으로 별도 설정 필요**
 
-* packages/elasticsearch/config/jvm.options
+* /etc/elasticsearch/jvm.options
   - Xms1g, Xmx1g 를 물리 메모리의 절반으로 수정
 
 ```bash
-$ vi packages/elasticsearch/config/elasticsearch.yml
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /etc/elasticsearch/elasticsearch.yml
++ 
++ ### For ClusterName & Node Name
++ cluster.name: mytuto-es
++ node.name: ip-172-31-14-110
++ 
++ ### For Response by External Request
 + network.host: 0.0.0.0
++ 
++ ### For Head
 + http.cors.enabled: true
 + http.cors.allow-origin: "*"
 
-$ vi packages/elasticsearch/config/jvm.options
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /etc/elasticsearch/jvm.options
 
 - -Xms1g
-+ -Xms4g
++ -Xms2g
 - -Xmx1g
-+ -Xmx4g
++ -Xmx2g
 ```
 
 ### Kibana
-* packages/kibana/config/kibana.yml
+* /etc/kibana/kibana.yml
   - server.host: "0.0.0.0" -> 외부에서 접근 가능하도록 변경
   - elasticsearch.url: "http://localhost:9200" -> 주석해제
   - kibana.index: ".kibana" -> 주석해제
 
 ```bash
-$ vi packages/kibana/config/kibana.yml
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /etc/kibana/kibana.yml
+
 - #server.host: "localhost"
 + server.host: "0.0.0.0"
 - #elasticsearch.url: "http://localhost:9200"
@@ -83,28 +93,31 @@ $ vi packages/kibana/config/kibana.yml
 ### Elasticsearch
 
 ```bash
-$ curl localhost:9200
-
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ curl localhost:9200
 {
-  "name" : "UZU8SQG",
-  "cluster_name" : "elasticsearch",
-  "cluster_uuid" : "YP3Lt-53QP6H5Ay_M6UTjw",
+  "name" : "ip-172-31-14-110",
+  "cluster_name" : "mytuto-es",
+  "cluster_uuid" : "52XfKjycSLCSwXqT_YPMXA",
   "version" : {
-    "number" : "6.5.2",
+    "number" : "6.6.0",
     "build_flavor" : "default",
-    "build_type" : "tar",
-    "build_hash" : "9434bed",
-    "build_date" : "2018-11-29T23:58:20.891072Z",
+    "build_type" : "rpm",
+    "build_hash" : "a9861f4",
+    "build_date" : "2019-01-24T11:27:09.439740Z",
     "build_snapshot" : false,
-    "lucene_version" : "7.5.0",
+    "lucene_version" : "7.6.0",
     "minimum_wire_compatibility_version" : "5.6.0",
     "minimum_index_compatibility_version" : "5.0.0"
   },
   "tagline" : "You Know, for Search"
 }
 
-$ curl -H 'Content-Type: application/json' -XPOST localhost:9200/firstindex/_doc -d '{ "mykey": "myvalue" }'
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ curl -H 'Content-Type: application/json' -XPOST localhost:9200/firstindex/_doc -d '{ "mykey": "myvalue" }'
 ```
+
+* Web Browser 에 http://http://ec2-3-0-99-205.ap-southeast-1.compute.amazonaws.com:9100/index.html?base_uri=http://{FQDN}:9200 실행
+![Optional Text](image/es-head.png)
 
 ### Kibana
 * Web Browser 에 http://{FQDN}:5601 실행
+![Optional Text](image/kibana.png)
