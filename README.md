@@ -115,9 +115,9 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ curl -H 'Content-Type: application/json' -XPOST localhost:9200/firstindex/_doc -d '{ "mykey": "myvalue" }'
 ```
 
-* Web Browser 에 http://http://ec2-3-0-99-205.ap-southeast-1.compute.amazonaws.com:9100/index.html?base_uri=http://{FQDN}:9200 실행
+* Web Browser 에 "http://http://ec2-3-0-99-205.ap-southeast-1.compute.amazonaws.com:9100/index.html?base_uri=http://{FQDN}:9200" 실행
 ![Optional Text](image/es-head.png)
 
 ### Kibana
-* Web Browser 에 http://{FQDN}:5601 실행
+* Web Browser 에 "http://{FQDN}:5601" 실행
 ![Optional Text](image/kibana.png)
