@@ -25,6 +25,7 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 [ec2-user@ip-xxx-xxx-xxx-xxx ~]$ cd ES-Tutorial-1
 
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1
+
 ##################### Menu ##############
  $ ./tuto1 [Command]
 #####################%%%%%%##############
@@ -36,58 +37,67 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
          6 : start kibana process
 #########################################
 
-
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 1
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 2
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 3
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 4
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 5
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 6
 
 ```
 
 ## ELK Tutorial 1 - Elasticsearch, Kibana 세팅
 
 ### Elasticsearch
-* /etc/elasticsearch/elasticsearch.yml
-  - cluster.name, node.name, network.host, http.cors.enabled, http.cors.allow-origin 추가설정
-  - **tuto1 2 실행 후 cluster.name 은 unique name 으로 별도 설정 필요**
+/etc/elasticsearch/elasticsearch.yml
 
-* /etc/elasticsearch/jvm.options
-  - Xms1g, Xmx1g 를 물리 메모리의 절반으로 수정
+1) cluster.name, node.name, network.host, http.cors.enabled, http.cors.allow-origin 추가설정
+2) **tuto1 2 실행 후 cluster.name 은 unique name 으로 별도 설정 필요**
 
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /etc/elasticsearch/elasticsearch.yml
-+ 
-+ ### For ClusterName & Node Name
-+ cluster.name: mytuto-es
-+ node.name: ip-172-31-14-110
-+ 
-+ ### For Response by External Request
-+ network.host: 0.0.0.0
-+ 
-+ ### For Head
-+ http.cors.enabled: true
-+ http.cors.allow-origin: "*"
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/elasticsearch/elasticsearch.yml
+ 
+### For ClusterName & Node Name
+cluster.name: mytuto-es
+node.name: ip-172-31-14-110
+ 
+### For Head
+http.cors.enabled: true
+http.cors.allow-origin: "*"
 
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /etc/elasticsearch/jvm.options
+### For Response by External Request
+network.host: 0.0.0.0
 
-- -Xms1g
-+ -Xms2g
-- -Xmx1g
-+ -Xmx2g
+```
+
+/etc/elasticsearch/jvm.options
+1) Xms1g, Xmx1g 를 물리 메모리의 절반으로 수정
+
+```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/elasticsearch/jvm.options
+
+-Xms2g
+-Xmx2g
+
 ```
 
 ### Kibana
-* /etc/kibana/kibana.yml
-  - server.host: "0.0.0.0" -> 외부에서 접근 가능하도록 변경
-  - elasticsearch.url: "http://localhost:9200" -> 주석해제
-  - kibana.index: ".kibana" -> 주석해제
+/etc/kibana/kibana.yml
+1) server.host 를 외부에서도 접근 가능하도록 0.0.0.0 으로 설정
+2) elasticsearch.url 은 localhost 에 ES 도 함께 설치했기 때문에 http://localhost:9200 으로 설정
+3) kibana.index 는 기본이름인 ".kibana" 로 설정
 
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /etc/kibana/kibana.yml
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/kibana/kibana.yml
+server.host: "0.0.0.0"
+elasticsearch.url: "http://localhost:9200"
+kibana.index: ".kibana"
 
-- #server.host: "localhost"
-+ server.host: "0.0.0.0"
-- #elasticsearch.url: "http://localhost:9200"
-+ elasticsearch.url: "http://localhost:9200"
-- #kibana.index: ".kibana"
-+ kibana.index: ".kibana"
 ```
 
 ## Smoke Test
@@ -95,7 +105,7 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 ### Elasticsearch
 
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ curl localhost:9200
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ curl localhost:9200
 {
   "name" : "ip-172-31-14-110",
   "cluster_name" : "mytuto-es",
@@ -114,7 +124,8 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
   "tagline" : "You Know, for Search"
 }
 
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ curl -H 'Content-Type: application/json' -XPOST localhost:9200/firstindex/_doc -d '{ "mykey": "myvalue" }'
+```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ curl -H 'Content-Type: application/json' -XPOST localhost:9200/firstindex/_doc -d '{ "mykey": "myvalue" }'
 ```
 
 * Web Browser 에 [http://ec2-52-221-155-168.ap-southeast-1.compute.amazonaws.com:9100/index.html?base_uri=http://{FQDN}:9200](http://ec2-52-221-155-168.ap-southeast-1.compute.amazonaws.com:9100/index.html?base_uri=http://FQDN:9200) 실행
@@ -136,6 +147,6 @@ path.logs: /var/log/elasticsearch 로 설정되어 cluster.name 이 적용된 �
 위의 경우에는 /var/log/elasticsearch/mytuto-es.log 에서 확인할 수 있습니다.
 
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ~]$ sudo vi /var/log/elasticsearch/mytuto-es.log
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /var/log/elasticsearch/mytuto-es.log
 ```
 
