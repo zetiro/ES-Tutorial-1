@@ -41,14 +41,6 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 2
 
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 3
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 4
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 5
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 6
-
 ```
 
 ## ELK Tutorial 1 - Elasticsearch, Kibana 세팅
@@ -61,11 +53,11 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/elasticsearch/elasticsearch.yml
- 
+
 ### For ClusterName & Node Name
 cluster.name: mytuto-es
 node.name: ip-172-31-14-110
- 
+
 ### For Head
 http.cors.enabled: true
 http.cors.allow-origin: "*"
@@ -73,6 +65,14 @@ http.cors.allow-origin: "*"
 ### For Response by External Request
 network.host: 0.0.0.0
 
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 3
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 4
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 5
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 6
 ```
 
 /etc/elasticsearch/jvm.options
