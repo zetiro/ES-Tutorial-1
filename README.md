@@ -37,10 +37,6 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
          6 : start kibana process
 #########################################
 
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 1
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 2
-
 ```
 
 ## ELK Tutorial 1 - Elasticsearch, Kibana 세팅
@@ -49,14 +45,19 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 /etc/elasticsearch/elasticsearch.yml
 
 1) cluster.name, node.name, network.host, http.cors.enabled, http.cors.allow-origin 추가설정
-2) **tuto1 2 실행 후 cluster.name 은 unique name 으로 별도 설정 필요**
+2) **./tuto1 1 ./tuto1 2 실행 후 cluster.name 은 unique name 으로 별도 설정 필요**
 
 ```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 1
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 2
+
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/elasticsearch/elasticsearch.yml
 
+
 ### For ClusterName & Node Name
-cluster.name: mytuto-es
-node.name: ip-172-31-14-110
+cluster.name: mytuto-es # Your Unique Cluster Name
+node.name: ip-172-31-14-110 # Your Unique Node Name
 
 ### For Head
 http.cors.enabled: true
@@ -65,14 +66,6 @@ http.cors.allow-origin: "*"
 ### For Response by External Request
 network.host: 0.0.0.0
 
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 3
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 4
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 5
-
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 6
 ```
 
 /etc/elasticsearch/jvm.options
@@ -86,6 +79,14 @@ network.host: 0.0.0.0
 
 ```
 
+두 파일 모두 수정이 완료되었으면 ./tuto1 3 을 실행하여 ES 프로세스 시작, 클러스터에 잘 조인되는지 확인
+
+```bash
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 3
+
+```
+
+
 ### Kibana
 /etc/kibana/kibana.yml
 1) server.host 를 외부에서도 접근 가능하도록 0.0.0.0 으로 설정
@@ -93,10 +94,24 @@ network.host: 0.0.0.0
 3) kibana.index 는 기본이름인 ".kibana" 로 설정
 
 ```bash
-[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/kibana/kibana.yml
-server.host: "0.0.0.0"
-elasticsearch.url: "http://localhost:9200"
-kibana.index: ".kibana"
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1
+
+##################### Menu ##############
+ $ ./tuto1 [Command]
+#####################%%%%%%##############
+         1 : install java & elasticsearch packages
+         2 : configure elasticsearch.yml & jvm.options
+         3 : start elasticsearch process
+         4 : install kibana packages
+         5 : configure kibana.yml
+         6 : start kibana process
+#########################################
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 4
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 5
+
+[ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 6
 
 ```
 
