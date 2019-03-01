@@ -57,7 +57,7 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 
 ### For ClusterName & Node Name
 cluster.name: mytuto-es # Your Unique Cluster Name
-node.name: ip-172-31-14-110 # Your Unique Node Name
+node.name: master-ip-172-31-14-110 # Your Unique Node Name
 
 ### For Head
 http.cors.enabled: true
@@ -122,7 +122,7 @@ network.host: 0.0.0.0
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ curl localhost:9200
 {
-  "name" : "ip-172-31-14-110",
+  "name" : "master-ip-172-31-14-110",
   "cluster_name" : "mytuto-es",
   "cluster_uuid" : "52XfKjycSLCSwXqT_YPMXA",
   "version" : {

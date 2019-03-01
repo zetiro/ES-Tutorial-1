@@ -50,7 +50,7 @@ function configure_es_yaml
     sudo cp -f ${ES_MYML}.${SEQ} ${ES_ETC}/${ES_MYML}
     sudo echo "### For ClusterName & Node Name" | sudo tee -a ${ES_ETC}/${ES_MYML} > /dev/null
     sudo echo "cluster.name: mytuto-es" | sudo tee -a ${ES_ETC}/${ES_MYML} > /dev/null
-    sudo echo "node.name: $ES_NODENAME" | sudo tee -a ${ES_ETC}/${ES_MYML} > /dev/null
+    sudo echo "node.name: master-$ES_NODENAME" | sudo tee -a ${ES_ETC}/${ES_MYML} > /dev/null
     sudo cat ${ES_ADDYML}.${SEQ} | sudo tee -a ${ES_ETC}/${ES_MYML} > /dev/null
 
     # jvm options Configure for Heap Memory
