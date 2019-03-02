@@ -122,9 +122,9 @@ network.host: 0.0.0.0
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ curl localhost:9200
 {
-  "name" : "master-ip-172-31-14-110",
+  "name" : "master-ip-172-31-13-126",
   "cluster_name" : "mytuto-es",
-  "cluster_uuid" : "52XfKjycSLCSwXqT_YPMXA",
+  "cluster_uuid" : "LTfRfk3KRLS31kQDROVu9A",
   "version" : {
     "number" : "6.6.0",
     "build_flavor" : "default",
