@@ -139,7 +139,6 @@ network.host: 0.0.0.0
   "tagline" : "You Know, for Search"
 }
 
-```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ curl -H 'Content-Type: application/json' -XPOST localhost:9200/firstindex/_doc -d '{ "mykey": "myvalue" }'
 ```
 
