@@ -42,7 +42,7 @@ Product Version. 6.6.0(2019/02/07 기준 Latest Ver.)
 ## ELK Tutorial 1 - Elasticsearch, Kibana 세팅
 
 ### Elasticsearch
-/etc/elasticsearch/elasticsearch.yml
+##### /etc/elasticsearch/elasticsearch.yml
 
 1) cluster.name, node.name, network.host, http.cors.enabled, http.cors.allow-origin 추가설정
 2) **./tuto1 1 ./tuto1 2 실행 후 cluster.name 은 unique name 으로 별도 설정 필요**
@@ -68,8 +68,8 @@ network.host: 0.0.0.0
 
 ```
 
-/etc/elasticsearch/jvm.options
-1) Xms1g, Xmx1g 를 물리 메모리의 절반으로 수정
+##### /etc/elasticsearch/jvm.options
+3) Xms1g, Xmx1g 를 물리 메모리의 절반으로 수정
 
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ sudo vi /etc/elasticsearch/jvm.options
@@ -79,7 +79,7 @@ network.host: 0.0.0.0
 
 ```
 
-두 파일 모두 수정이 완료되었으면 ./tuto1 3 을 실행하여 ES 프로세스 시작, 클러스터에 잘 조인되는지 확인
+4) 두 파일 모두 수정이 완료되었으면 ./tuto1 3 을 실행하여 ES 프로세스 시작, 클러스터에 잘 조인되는지 확인
 
 ```bash
 [ec2-user@ip-xxx-xxx-xxx-xxx ES-Tutorial-1]$ ./tuto1 3
